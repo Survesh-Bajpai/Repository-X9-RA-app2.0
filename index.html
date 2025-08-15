@@ -3,678 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NIFTY500 Multi-Sector Equity Research Platform - Research Scientist Survesh Bajpai</title>
+    <title>NIFTY500 Multi-Sector Equity Research Platform</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="app">
-        <!-- Header Navigation -->
+    <div class="app-container">
+        <!-- Header -->
         <header class="header">
             <div class="container">
-                <div class="header-content">
-                    <div class="brand">
-                        <h1>NIFTY500 Multi-Sector Equity Research Platform</h1>
-                        <p><strong>Research Scientist - Survesh Bajpai</strong> | Email: <a href="mailto:Surveshb2@gmail.com">Surveshb2@gmail.com</a></p>
-                    </div>
-                    <div class="header-actions">
-                        <button id="themeToggle" class="btn btn--secondary">🌓 Theme</button>
-                        <button id="exportBtn" class="btn btn--primary">📊 Export Report</button>
-                    </div>
-                </div>
-                
-                <nav class="nav">
-                    <button class="nav-btn active" data-section="dashboard">Dashboard</button>
-                    <button class="nav-btn" data-section="sector-analysis">Sector Analysis</button>
-                    <button class="nav-btn" data-section="stock-selection">Stock Selection</button>
-                    <button class="nav-btn" data-section="dcf-valuation">DCF Valuation</button>
-                    <button class="nav-btn" data-section="risk-analysis">Risk Analysis</button>
-                    <button class="nav-btn" data-section="peer-comparison">Peer Comparison</button>
-                    <button class="nav-btn" data-section="forecasts">Forecasts</button>
-                    <button class="nav-btn" data-section="methodology">Methodology</button>
-                </nav>
+                <h1>NIFTY500 Multi-Sector Equity Research Platform</h1>
+                <p class="subtitle">Research Scientist Survesh Bajpai</p>
             </div>
         </header>
 
-        <main class="main">
-            <!-- Dashboard Section -->
-            <section id="dashboard" class="section active">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Multi-Sector Dashboard & Market Overview</h2>
-                        <p class="section-desc">Comprehensive analysis across all NIFTY500 sectors with advanced visualizations and DCF models</p>
-                    </div>
-
-                    <!-- Quick Selection Widgets -->
-                    <div class="selection-widgets">
-                        <div class="widget-section">
-                            <h3>📊 Broad Market Indices</h3>
-                            <div class="index-cards">
-                                <div class="index-card" data-index="NIFTY50">
-                                    <div class="index-name">NIFTY 50</div>
-                                    <div class="index-metrics">
-                                        <span>₹11.67 L Cr</span>
-                                        <span class="pe-info">PE: 20.29</span>
-                                    </div>
-                                </div>
-                                <div class="index-card" data-index="NIFTYNEXT50">
-                                    <div class="index-name">NIFTY Next 50</div>
-                                    <div class="index-metrics">
-                                        <span>₹5.22 L Cr</span>
-                                        <span class="pe-info">PE: 21.27</span>
-                                    </div>
-                                </div>
-                                <div class="index-card" data-index="NIFTYMIDCAP150">
-                                    <div class="index-name">NIFTY Midcap 150</div>
-                                    <div class="index-metrics">
-                                        <span>₹4.41 L Cr</span>
-                                        <span class="pe-info">PE: 24.81</span>
-                                    </div>
-                                </div>
-                                <div class="index-card" data-index="NIFTYSMALLCAP250">
-                                    <div class="index-name">NIFTY Small Cap 250</div>
-                                    <div class="index-metrics">
-                                        <span>₹1.48 L Cr</span>
-                                        <span class="pe-info">PE: 25.13</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="widget-section">
-                            <h3>🏭 Sector Selection</h3>
-                            <div class="sector-grid">
-                                <div class="sector-card" data-sector="Banking">
-                                    <div class="sector-icon">🏦</div>
-                                    <div class="sector-name">Banking</div>
-                                    <div class="sector-weight">13.41%</div>
-                                </div>
-                                <div class="sector-card" data-sector="Information Technology">
-                                    <div class="sector-icon">💻</div>
-                                    <div class="sector-name">Information Technology</div>
-                                    <div class="sector-weight">8.89%</div>
-                                </div>
-                                <div class="sector-card" data-sector="Healthcare">
-                                    <div class="sector-icon">🏥</div>
-                                    <div class="sector-name">Healthcare</div>
-                                    <div class="sector-weight">6.55%</div>
-                                </div>
-                                <div class="sector-card" data-sector="FMCG">
-                                    <div class="sector-icon">🛒</div>
-                                    <div class="sector-name">FMCG</div>
-                                    <div class="sector-weight">5.96%</div>
-                                </div>
-                                <div class="sector-card" data-sector="Oil & Gas">
-                                    <div class="sector-icon">⛽</div>
-                                    <div class="sector-name">Oil & Gas</div>
-                                    <div class="sector-weight">6.81%</div>
-                                </div>
-                                <div class="sector-card" data-sector="Automobile">
-                                    <div class="sector-icon">🚗</div>
-                                    <div class="sector-name">Automobile</div>
-                                    <div class="sector-weight">7.40%</div>
-                                </div>
-                                <div class="sector-card" data-sector="Financial Services">
-                                    <div class="sector-icon">💰</div>
-                                    <div class="sector-name">Financial Services</div>
-                                    <div class="sector-weight">8.84%</div>
-                                </div>
-                                <div class="sector-card" data-sector="Capital Goods">
-                                    <div class="sector-icon">🏭</div>
-                                    <div class="sector-name">Capital Goods</div>
-                                    <div class="sector-weight">4.67%</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="widget-section">
-                            <h3>🔍 Individual Stock Search</h3>
-                            <div class="search-container">
-                                <input type="text" id="stockSearch" class="form-control" placeholder="Search stocks in NIFTY500 universe..." autocomplete="off">
-                                <div id="searchResults" class="search-results"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Market Summary Cards -->
-                    <div class="summary-metrics">
-                        <div class="summary-card">
-                            <div class="summary-icon">📈</div>
-                            <div class="summary-content">
-                                <h3>Total Market Cap</h3>
-                                <div class="summary-value">₹254.2 Lakh Cr</div>
-                                <div class="summary-change positive">+11.8% YoY</div>
-                            </div>
-                        </div>
-                        <div class="summary-card">
-                            <div class="summary-icon">🏢</div>
-                            <div class="summary-content">
-                                <h3>Companies Analyzed</h3>
-                                <div class="summary-value">500</div>
-                                <div class="summary-change">NIFTY500 Universe</div>
-                            </div>
-                        </div>
-                        <div class="summary-card">
-                            <div class="summary-icon">🎯</div>
-                            <div class="summary-content">
-                                <h3>Avg FY26 Expected Growth</h3>
-                                <div class="summary-value">15.81%</div>
-                                <div class="summary-change positive">vs 12.4% FY25</div>
-                            </div>
-                        </div>
-                        <div class="summary-card">
-                            <div class="summary-icon">📊</div>
-                            <div class="summary-content">
-                                <h3>Weighted Avg FY26 PE</h3>
-                                <div class="summary-value">20.29x</div>
-                                <div class="summary-change">Fair Valuation</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Advanced Dashboard Visualizations -->
-                    <div class="dashboard-grid">
-                        <div class="dashboard-panel">
-                            <div class="panel-header">
-                                <h3>📊 Sector Composition Treemap</h3>
-                                <span class="panel-subtitle">Market cap weighted sector representation</span>
-                            </div>
-                            <div class="chart-container">
-                                <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/0ab1178c78630e094c77aa0223b1563f/4f7aeb84-2ed0-43b9-bebd-26db0c683fee/fd1b514b.png" alt="Sector Composition Analysis" class="chart-image">
-                            </div>
-                        </div>
-
-                        <div class="dashboard-panel">
-                            <div class="panel-header">
-                                <h3>🎯 Forward PE vs Growth Scatter</h3>
-                                <span class="panel-subtitle">FY26 valuation vs growth expectations</span>
-                            </div>
-                            <div class="chart-container">
-                                <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/0ab1178c78630e094c77aa0223b1563f/65e782f6-0ac2-45dd-8a7c-743703cb44e6/353837dd.png" alt="PE vs Growth Analysis" class="chart-image">
-                            </div>
-                        </div>
-
-                        <div class="dashboard-panel">
-                            <div class="panel-header">
-                                <h3>💰 Valuation Metrics Heatmap</h3>
-                                <span class="panel-subtitle">Cross-ratio relationships analysis</span>
-                            </div>
-                            <div class="chart-container">
-                                <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/0ab1178c78630e094c77aa0223b1563f/931873c3-ea5f-4af2-ac94-68eaa72e92ed/b659969a.png" alt="Valuation Analysis" class="chart-image">
-                            </div>
-                        </div>
-
-                        <div class="dashboard-panel">
-                            <div class="panel-header">
-                                <h3>📈 Revenue Growth Trajectories</h3>
-                                <span class="panel-subtitle">Sector-wise growth momentum analysis</span>
-                            </div>
-                            <div class="chart-container">
-                                <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/0ab1178c78630e094c77aa0223b1563f/eda88d73-989e-478b-b513-d0078ca6dc90/fe914857.png" alt="Revenue Growth Forecast" class="chart-image">
-                            </div>
-                        </div>
-
-                        <div class="dashboard-panel full-width">
-                            <div class="panel-header">
-                                <h3>🔄 Interactive Chart Selection</h3>
-                                <span class="panel-subtitle">Choose from 20+ advanced visualizations</span>
-                            </div>
-                            <div class="chart-selector">
-                                <div class="chart-tabs">
-                                    <button class="chart-tab active" data-chart="profitability">Profitability Analysis</button>
-                                    <button class="chart-tab" data-chart="risk-return">Risk-Return Bubble</button>
-                                    <button class="chart-tab" data-chart="momentum">Price Momentum</button>
-                                    <button class="chart-tab" data-chart="correlation">Sector Correlation</button>
-                                    <button class="chart-tab" data-chart="esg">ESG Scores</button>
-                                </div>
-                                <div class="chart-container" style="position: relative; height: 400px;">
-                                    <canvas id="interactiveChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Sector Analysis Section -->
-            <section id="sector-analysis" class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Comprehensive Sector Analysis</h2>
-                        <p class="section-desc">Deep-dive analysis of all NIFTY500 sectors with 20+ visualizations and metrics</p>
-                    </div>
-
-                    <div class="sector-controls">
-                        <select id="sectorSelect" class="form-control">
-                            <option value="all">All Sectors Overview</option>
-                            <option value="Banking">Banking</option>
-                            <option value="Information Technology">Information Technology</option>
-                            <option value="Healthcare">Healthcare</option>
-                            <option value="FMCG">FMCG</option>
-                            <option value="Oil & Gas">Oil & Gas</option>
-                            <option value="Automobile">Automobile</option>
-                            <option value="Financial Services">Financial Services</option>
-                            <option value="Capital Goods">Capital Goods</option>
-                        </select>
-                    </div>
-
-                    <div id="sectorDetailsPanel" class="sector-details">
-                        <!-- Sector details will be populated dynamically -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- Stock Selection Section -->
-            <section id="stock-selection" class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Individual Stock Analysis</h2>
-                        <p class="section-desc">Comprehensive stock-level analysis with forward-looking ratios and peer comparison</p>
-                    </div>
-
-                    <div class="stock-filters">
-                        <div class="filter-row">
-                            <div class="filter-group">
-                                <label class="filter-label">Market Cap:</label>
-                                <select id="mcapFilter" class="form-control">
-                                    <option value="all">All</option>
-                                    <option value="large">Large Cap</option>
-                                    <option value="mid">Mid Cap</option>
-                                    <option value="small">Small Cap</option>
-                                </select>
-                            </div>
-                            <div class="filter-group">
-                                <label class="filter-label">Sector:</label>
-                                <select id="sectorFilter" class="form-control">
-                                    <option value="all">All Sectors</option>
-                                </select>
-                            </div>
-                            <div class="filter-group">
-                                <label class="filter-label">Risk Rating:</label>
-                                <select id="riskFilter" class="form-control">
-                                    <option value="all">All Risk Levels</option>
-                                    <option value="Low">Low Risk</option>
-                                    <option value="Medium">Medium Risk</option>
-                                    <option value="High">High Risk</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="stocksGrid" class="stocks-grid">
-                        <!-- Stocks will be populated dynamically -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- DCF Valuation Section -->
-            <section id="dcf-valuation" class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Advanced DCF Valuation Engine</h2>
-                        <p class="section-desc">Interactive DCF models with Bull/Base/Bear scenarios and sensitivity analysis</p>
-                    </div>
-
-                    <div class="dcf-grid">
-                        <div class="dcf-panel">
-                            <div class="panel-header">
-                                <h3>📊 DCF Scenario Analysis</h3>
-                                <span class="panel-subtitle">Bull, Base, and Bear case valuations</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="dcfScenarioChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="dcf-panel">
-                            <div class="panel-header">
-                                <h3>💰 Forecasted FCF Analysis</h3>
-                                <span class="panel-subtitle">5-year free cash flow projections</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="fcfForecastChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="dcf-panel">
-                            <div class="panel-header">
-                                <h3>🎯 Terminal Value Breakdown</h3>
-                                <span class="panel-subtitle">TV composition and sensitivity</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="terminalValueChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="dcf-panel">
-                            <div class="panel-header">
-                                <h3>📈 Enterprise Value Bridge</h3>
-                                <span class="panel-subtitle">EV to equity value waterfall</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="evBridgeChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="dcf-assumptions-panel">
-                        <h3>🔧 DCF Model Assumptions</h3>
-                        <div class="assumptions-tabs">
-                            <button class="assumption-tab active" data-assumption="revenue">Revenue Projections</button>
-                            <button class="assumption-tab" data-assumption="margins">Margin Evolution</button>
-                            <button class="assumption-tab" data-assumption="wacc">WACC Calculation</button>
-                            <button class="assumption-tab" data-assumption="terminal">Terminal Value</button>
-                        </div>
-                        <div id="assumptionsContent" class="assumptions-content">
-                            <!-- Assumptions will be populated dynamically -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Risk Analysis Section -->
-            <section id="risk-analysis" class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Multi-Dimensional Risk Analysis</h2>
-                        <p class="section-desc">Comprehensive risk assessment with VaR, stress testing, and ESG factors</p>
-                    </div>
-
-                    <div class="risk-grid">
-                        <div class="risk-panel">
-                            <div class="panel-header">
-                                <h3>🎯 Risk Factor Radar</h3>
-                                <span class="panel-subtitle">Multi-dimensional risk assessment</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="riskRadarChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="risk-panel">
-                            <div class="panel-header">
-                                <h3>🔥 Risk Heatmap</h3>
-                                <span class="panel-subtitle">Sector-wise risk intensity</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="riskHeatmapChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="risk-panel">
-                            <div class="panel-header">
-                                <h3>📊 VaR Analysis</h3>
-                                <span class="panel-subtitle">Value at Risk calculations</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="varChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="risk-panel">
-                            <div class="panel-header">
-                                <h3>🌱 ESG Risk Scores</h3>
-                                <span class="panel-subtitle">Environmental, Social, Governance risks</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="esgChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Peer Comparison Section -->
-            <section id="peer-comparison" class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Advanced Peer Comparison</h2>
-                        <p class="section-desc">Comprehensive peer analysis with ranking and benchmarking across multiple metrics</p>
-                    </div>
-
-                    <div class="peer-controls">
-                        <div class="comparison-selector">
-                            <label>Select Companies for Comparison:</label>
-                            <div id="companySelector" class="company-selector">
-                                <!-- Company checkboxes will be populated -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="peer-grid">
-                        <div class="peer-panel">
-                            <div class="panel-header">
-                                <h3>📊 Peer Ranking Matrix</h3>
-                                <span class="panel-subtitle">Multi-metric ranking comparison</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="peerRankingChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="peer-panel">
-                            <div class="panel-header">
-                                <h3>💰 Valuation Comparison</h3>
-                                <span class="panel-subtitle">PE, PB, EV/EBITDA comparison</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="valuationComparisonChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="peer-table-section">
-                        <h3>📋 Detailed Peer Comparison Table</h3>
-                        <div class="table-container">
-                            <table id="peerComparisonTable" class="peer-table">
-                                <!-- Table will be populated dynamically -->
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Forecasts Section -->
-            <section id="forecasts" class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>5-Year Forward Projections</h2>
-                        <p class="section-desc">Advanced forecasting models with scenario analysis and trend projections</p>
-                    </div>
-
-                    <div class="forecast-grid">
-                        <div class="forecast-panel">
-                            <div class="panel-header">
-                                <h3>📈 Revenue Projections</h3>
-                                <span class="panel-subtitle">5-year revenue growth forecasts</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="revenueProjectionChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="forecast-panel">
-                            <div class="panel-header">
-                                <h3>💰 EBITDA Evolution</h3>
-                                <span class="panel-subtitle">Margin expansion analysis</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="ebitdaEvolutionChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="forecast-panel">
-                            <div class="panel-header">
-                                <h3>📊 EPS Growth Trajectory</h3>
-                                <span class="panel-subtitle">Earnings per share projections</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="epsGrowthChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="forecast-panel">
-                            <div class="panel-header">
-                                <h3>🎯 Return Metrics Forecast</h3>
-                                <span class="panel-subtitle">ROE, ROCE evolution</span>
-                            </div>
-                            <div class="chart-container" style="position: relative; height: 400px;">
-                                <canvas id="returnMetricsChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Methodology Section -->
-            <section id="methodology" class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Research Methodology & SEBI Compliance</h2>
-                        <p class="section-desc">Comprehensive methodology, disclaimers, and regulatory compliance information</p>
-                    </div>
-
-                    <div class="methodology-content">
-                        <div class="sebi-compliance-header">
-                            <div class="analyst-info-card">
-                                <h3>👨‍💼 Research Analyst Information</h3>
-                                <div class="analyst-details">
-                                    <p><strong>Name:</strong> Research Scientist - Survesh Bajpai</p>
-                                    <p><strong>Email:</strong> <a href="mailto:Surveshb2@gmail.com">Surveshb2@gmail.com</a></p>
-                                    <p><strong>Qualifications:</strong> PhD Finance, CFA, FRM</p>
-                                    <p><strong>Experience:</strong> 15+ years in equity research and quantitative analysis</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="massive-disclaimer">
-                            <h3>⚠️ MASSIVE DISCLAIMER AND RISK WARNINGS</h3>
-                            <div class="disclaimer-content">
-                                <div class="disclaimer-section">
-                                    <h4>🚨 INVESTMENT RISK WARNINGS</h4>
-                                    <ul>
-                                        <li><strong>HIGH RISK INVESTMENT:</strong> Equity investments are subject to extremely high market risks and volatility. Past performance is no guarantee of future results.</li>
-                                        <li><strong>TOTAL LOSS POSSIBLE:</strong> You may lose your entire investment. Only invest what you can afford to lose completely.</li>
-                                        <li><strong>NO GUARANTEED RETURNS:</strong> All projections and forecasts are estimates only. Actual results may vary significantly.</li>
-                                        <li><strong>MARKET VOLATILITY:</strong> Stock prices can fluctuate dramatically due to market conditions, economic factors, and company-specific events.</li>
-                                        <li><strong>LIQUIDITY RISK:</strong> Some stocks may become illiquid, making it difficult to sell at desired prices.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="disclaimer-section">
-                                    <h4>📊 RESEARCH LIMITATIONS</h4>
-                                    <ul>
-                                        <li><strong>FORWARD-LOOKING STATEMENTS:</strong> All projections are based on current information and assumptions that may prove incorrect.</li>
-                                        <li><strong>DATA ACCURACY:</strong> While we strive for accuracy, data may contain errors or omissions. Verify independently before making decisions.</li>
-                                        <li><strong>MODEL LIMITATIONS:</strong> DCF and valuation models are simplifications of complex business realities and may not capture all risks.</li>
-                                        <li><strong>MARKET CHANGES:</strong> Rapid market changes may make analysis outdated quickly.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="disclaimer-section">
-                                    <h4>⚖️ REGULATORY DISCLAIMERS</h4>
-                                    <ul>
-                                        <li><strong>NOT PERSONALIZED ADVICE:</strong> This research is general in nature and not tailored to your specific financial situation or goals.</li>
-                                        <li><strong>CONSULT PROFESSIONALS:</strong> Always consult qualified financial advisors before making investment decisions.</li>
-                                        <li><strong>NO SOLICITATION:</strong> This research is for informational purposes only and should not be construed as a solicitation to buy or sell securities.</li>
-                                        <li><strong>INDEPENDENT RESEARCH:</strong> Conduct your own research and due diligence before making any investment decisions.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="disclaimer-section">
-                                    <h4>🔒 ANALYST DISCLOSURES</h4>
-                                    <ul>
-                                        <li><strong>NO CONFLICT OF INTEREST:</strong> The analyst has no financial interest in the companies covered in this report.</li>
-                                        <li><strong>NO COMPENSATION:</strong> No compensation has been received from any company mentioned in this report.</li>
-                                        <li><strong>INDEPENDENT ANALYSIS:</strong> All opinions and recommendations are based solely on research and analysis.</li>
-                                        <li><strong>NO INSIDER INFORMATION:</strong> This research is based only on publicly available information.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="disclaimer-section">
-                                    <h4>📚 DATA SOURCES & METHODOLOGY</h4>
-                                    <ul>
-                                        <li><strong>PRIMARY SOURCES:</strong> BSE, NSE, company annual reports, investor presentations</li>
-                                        <li><strong>THIRD-PARTY DATA:</strong> Bloomberg, Reuters, industry reports (accuracy not guaranteed)</li>
-                                        <li><strong>DCF METHODOLOGY:</strong> Standard discounted cash flow models with sector-specific assumptions</li>
-                                        <li><strong>PEER ANALYSIS:</strong> Relative valuation based on comparable company analysis</li>
-                                        <li><strong>RISK ASSESSMENT:</strong> Quantitative and qualitative risk factor analysis</li>
-                                    </ul>
-                                </div>
-
-                                <div class="disclaimer-highlight">
-                                    <p><strong>⚠️ FINAL WARNING: EQUITY INVESTMENTS ARE SUBJECT TO MARKET RISKS. READ ALL RELATED DOCUMENTS CAREFULLY. PAST PERFORMANCE IS NOT INDICATIVE OF FUTURE RESULTS. CONSULT YOUR FINANCIAL ADVISOR BEFORE INVESTING.</strong></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="methodology-details">
-                            <h3>🔬 Research Methodology Framework</h3>
-                            <div class="method-grid">
-                                <div class="method-card">
-                                    <h4>📊 Quantitative Analysis</h4>
-                                    <ul>
-                                        <li>DCF modeling with sensitivity analysis</li>
-                                        <li>Monte Carlo simulations for risk assessment</li>
-                                        <li>Peer relative valuation analysis</li>
-                                        <li>Statistical correlation and regression analysis</li>
-                                        <li>Time series forecasting models</li>
-                                    </ul>
-                                </div>
-
-                                <div class="method-card">
-                                    <h4>🏢 Fundamental Analysis</h4>
-                                    <ul>
-                                        <li>Business model evaluation</li>
-                                        <li>Competitive positioning analysis</li>
-                                        <li>Management quality assessment</li>
-                                        <li>Industry dynamics and trends</li>
-                                        <li>Financial statement analysis</li>
-                                    </ul>
-                                </div>
-
-                                <div class="method-card">
-                                    <h4>📈 Technical Analysis</h4>
-                                    <ul>
-                                        <li>Price momentum indicators</li>
-                                        <li>Volume analysis patterns</li>
-                                        <li>Support and resistance levels</li>
-                                        <li>Moving averages and trends</li>
-                                        <li>Volatility measurements</li>
-                                    </ul>
-                                </div>
-
-                                <div class="method-card">
-                                    <h4>🌱 ESG Integration</h4>
-                                    <ul>
-                                        <li>Environmental impact assessment</li>
-                                        <li>Social responsibility metrics</li>
-                                        <li>Governance quality evaluation</li>
-                                        <li>Sustainability risk factors</li>
-                                        <li>ESG score integration in valuation</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="footer">
+        <!-- Navigation -->
+        <nav class="nav-tabs">
             <div class="container">
-                <div class="footer-content">
-                    <div class="footer-info">
-                        <p><strong>Research Scientist - Survesh Bajpai</strong> | Email: <a href="mailto:Surveshb2@gmail.com">Surveshb2@gmail.com</a></p>
-                        <p><strong>Report Date:</strong> August 16, 2025 | <strong>Next Review:</strong> November 16, 2025</p>
-                        <p><strong>Universe:</strong> NIFTY500 (500 Companies) | <strong>Analysis Framework:</strong> Multi-Sector DCF & Peer Valuation</p>
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+                    <button class="tab-btn" data-tab="sector-analysis">Sector Analysis</button>
+                    <button class="tab-btn" data-tab="stock-selection">Stock Selection</button>
+                    <button class="tab-btn" data-tab="dcf-valuation">DCF Valuation</button>
+                    <button class="tab-btn" data-tab="risk-analysis">Risk Analysis</button>
+                    <button class="tab-btn" data-tab="peer-comparison">Peer Comparison</button>
+                    <button class="tab-btn" data-tab="forecasts">Forecasts</button>
+                    <button class="tab-btn" data-tab="methodology">Methodology</button>
+                    <button class="tab-btn" data-tab="disclaimer">Disclaimer</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="tab-content active">
+                    <div class="selection-panel">
+                        <div class="selection-row">
+                            <div class="form-group">
+                                <label class="form-label">Select Sector</label>
+                                <select id="sector-select" class="form-control">
+                                    <option value="">All Sectors</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Select Stock</label>
+                                <select id="stock-select" class="form-control">
+                                    <option value="">Select a stock</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div class="footer-disclaimer">
-                        <p><em>⚠️ SEBI COMPLIANCE: This research has been conducted by qualified Research Scientist. Equity investments are subject to market risks. Read all disclaimers carefully before making any investment decisions. Past performance is not indicative of future results.</em></p>
+
+                    <div class="dashboard-grid">
+                        <div class="metric-cards">
+                            <div class="card metric-card">
+                                <div class="card__body">
+                                    <h3>Market Cap</h3>
+                                    <div class="metric-value" id="market-cap">₹ --</div>
+                                </div>
+                            </div>
+                            <div class="card metric-card">
+                                <div class="card__body">
+                                    <h3>P/E Ratio</h3>
+                                    <div class="metric-value" id="pe-ratio">--</div>
+                                </div>
+                            </div>
+                            <div class="card metric-card">
+                                <div class="card__body">
+                                    <h3>ROE</h3>
+                                    <div class="metric-value" id="roe">--%</div>
+                                </div>
+                            </div>
+                            <div class="card metric-card">
+                                <div class="card__body">
+                                    <h3>Revenue Growth</h3>
+                                    <div class="metric-value" id="revenue-growth">--%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chart-section">
+                            <div class="card">
+                                <div class="card__header">
+                                    <h3>Revenue Growth Trajectory</h3>
+                                </div>
+                                <div class="card__body">
+                                    <div class="chart-container" style="position: relative; height: 300px;">
+                                        <canvas id="revenue-chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-section">
+                            <h3>Portfolio Allocation Recommendations</h3>
+                            <div class="portfolio-grid">
+                                <div class="card">
+                                    <div class="card__header">
+                                        <h4>Conservative</h4>
+                                        <span class="status status--info">Low Risk</span>
+                                    </div>
+                                    <div class="card__body">
+                                        <div class="chart-container" style="position: relative; height: 200px;">
+                                            <canvas id="conservative-chart"></canvas>
+                                        </div>
+                                        <div class="allocation-details">
+                                            <p>Expected Return: <strong>8.5%</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card__header">
+                                        <h4>Balanced</h4>
+                                        <span class="status status--warning">Medium Risk</span>
+                                    </div>
+                                    <div class="card__body">
+                                        <div class="chart-container" style="position: relative; height: 200px;">
+                                            <canvas id="balanced-chart"></canvas>
+                                        </div>
+                                        <div class="allocation-details">
+                                            <p>Expected Return: <strong>11.2%</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card__header">
+                                        <h4>Aggressive</h4>
+                                        <span class="status status--error">High Risk</span>
+                                    </div>
+                                    <div class="card__body">
+                                        <div class="chart-container" style="position: relative; height: 200px;">
+                                            <canvas id="aggressive-chart"></canvas>
+                                        </div>
+                                        <div class="allocation-details">
+                                            <p>Expected Return: <strong>14.8%</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sector Analysis Tab -->
+                <div id="sector-analysis" class="tab-content">
+                    <div class="sector-analysis-grid">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Sector Valuation Analysis</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="chart-container" style="position: relative; height: 400px;">
+                                    <canvas id="sector-valuation-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Growth vs Risk Matrix</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="chart-container" style="position: relative; height: 400px;">
+                                    <canvas id="growth-risk-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Selection Tab -->
+                <div id="stock-selection" class="tab-content">
+                    <div class="stock-grid" id="stock-grid">
+                        <!-- Stock cards will be dynamically generated -->
+                    </div>
+                </div>
+
+                <!-- DCF Valuation Tab -->
+                <div id="dcf-valuation" class="tab-content">
+                    <div class="dcf-container">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>DCF Valuation Model</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="dcf-inputs">
+                                    <div class="form-group">
+                                        <label class="form-label">Growth Rate (%)</label>
+                                        <input type="number" id="growth-rate" class="form-control" value="10" step="0.1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Discount Rate (%)</label>
+                                        <input type="number" id="discount-rate" class="form-control" value="12" step="0.1">
+                                    </div>
+                                    <button class="btn btn--primary" onclick="calculateDCF()">Calculate DCF</button>
+                                </div>
+                                <div class="dcf-results" id="dcf-results">
+                                    <h4>Intrinsic Value: <span id="intrinsic-value">--</span></h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Forward Looking Ratios</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="ratios-grid" id="forward-ratios">
+                                    <!-- Forward ratios will be populated -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Quantitative Valuation Metric (QVM)</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="qvm-section">
+                                    <div class="qvm-value" id="qvm-value">--</div>
+                                    <div class="qvm-interpretation" id="qvm-interpretation">Select a stock to calculate QVM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Analysis Tab -->
+                <div id="risk-analysis" class="tab-content">
+                    <div class="risk-analysis-grid">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Porter's 5 Forces Analysis</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="chart-container" style="position: relative; height: 400px;">
+                                    <canvas id="porter-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Risk Metrics</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="risk-metrics" id="risk-metrics">
+                                    <!-- Risk metrics will be populated -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peer Comparison Tab -->
+                <div id="peer-comparison" class="tab-content">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Peer Comparison Analysis</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="peer-table-container">
+                                <table class="peer-table" id="peer-table">
+                                    <!-- Peer comparison table will be populated -->
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forecasts Tab -->
+                <div id="forecasts" class="tab-content">
+                    <div class="forecasts-grid">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Financial Projections</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="chart-container" style="position: relative; height: 400px;">
+                                    <canvas id="forecasts-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Scenario Analysis</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="scenario-analysis" id="scenario-analysis">
+                                    <!-- Scenario analysis will be populated -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Methodology Tab -->
+                <div id="methodology" class="tab-content">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Research Methodology</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="methodology-content">
+                                <h4>Key Drivers</h4>
+                                <ul>
+                                    <li>Revenue Growth Analysis</li>
+                                    <li>Profitability Metrics (ROE, ROCE)</li>
+                                    <li>Valuation Multiples (P/E, PEG)</li>
+                                    <li>Risk Assessment (Beta, Volatility)</li>
+                                </ul>
+
+                                <h4>Models Used</h4>
+                                <ul>
+                                    <li>Discounted Cash Flow (DCF) Model</li>
+                                    <li>Relative Valuation Model</li>
+                                    <li>Porter's 5 Forces Framework</li>
+                                    <li>Custom Quantitative Valuation Metric (QVM)</li>
+                                </ul>
+
+                                <h4>Key Assumptions</h4>
+                                <ul>
+                                    <li>Cost of Equity: 12.5%</li>
+                                    <li>WACC: 9.8%</li>
+                                    <li>Risk-free Rate: 7.2%</li>
+                                    <li>Market Risk Premium: 6.8%</li>
+                                    <li>Terminal Growth Rate: 3-4%</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disclaimer Tab -->
+                <div id="disclaimer" class="tab-content">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Most Important Terms and Conditions (MITC)</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="disclaimer-content">
+                                <h4>Research Analyst Credentials</h4>
+                                <p><strong>Survesh Bajpai</strong></p>
+                                <ul>
+                                    <li>NISM PGP RA/IA/PM Certified</li>
+                                    <li>IIMBx Finance Graduate</li>
+                                    <li>World Quant University US - MSc in Financial Engineering</li>
+                                </ul>
+
+                                <h4>Important Terms</h4>
+                                <ul>
+                                    <li>This research is for educational and informational purposes only</li>
+                                    <li>Past performance does not guarantee future results</li>
+                                    <li>All investments carry risk of loss</li>
+                                    <li>Consult a qualified financial advisor before making investment decisions</li>
+                                    <li>The QVM is a proprietary metric and should be used alongside other analysis</li>
+                                    <li>Projections and forecasts are estimates based on current information</li>
+                                </ul>
+
+                                <h4>Data Sources</h4>
+                                <p>NIFTY500 index constituents, financial statements, market data as of current date.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
+        </main>
     </div>
 
     <script src="app.js"></script>
