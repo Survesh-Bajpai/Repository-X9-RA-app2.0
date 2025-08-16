@@ -1,0 +1,2627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIFTY500 Multi-Sector Equity Research Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+:root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08); /* Light blue */
+  --color-bg-2: rgba(245, 158, 11, 0.08); /* Light yellow */
+  --color-bg-3: rgba(34, 197, 94, 0.08); /* Light green */
+  --color-bg-4: rgba(239, 68, 68, 0.08); /* Light red */
+  --color-bg-5: rgba(147, 51, 234, 0.08); /* Light purple */
+  --color-bg-6: rgba(249, 115, 22, 0.08); /* Light orange */
+  --color-bg-7: rgba(236, 72, 153, 0.08); /* Light pink */
+  --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Common style patterns */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  /* RGB versions for opacity control */
+  --color-success-rgb: 33, 128, 141;
+  --color-error-rgb: 192, 21, 47;
+  --color-warning-rgb: 168, 75, 47;
+  --color-info-rgb: 98, 108, 113;
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* RGB versions for opacity control (Dark Mode) */
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    /* Background color tokens (Dark Mode) */
+    --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
+    --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
+    --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
+    --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
+    --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
+    --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
+    --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
+    --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
+    
+    /* Semantic Color Tokens (Dark Mode) */
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --button-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    /* Common style patterns - updated for dark mode */
+    --focus-ring: 0 0 0 3px var(--color-focus-ring);
+    --focus-outline: 2px solid var(--color-primary);
+    --status-bg-opacity: 0.15;
+    --status-border-opacity: 0.25;
+    --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+    /* RGB versions for dark mode */
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+/* Data attribute for manual theme switching */
+[data-color-scheme="dark"] {
+  /* RGB versions for opacity control (dark mode) */
+  --color-gray-400-rgb: 119, 124, 124;
+  --color-teal-300-rgb: 50, 184, 198;
+  --color-gray-300-rgb: 167, 169, 169;
+  --color-gray-200-rgb: 245, 245, 245;
+
+  /* Colorful background palette - Dark Mode */
+  --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
+  --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
+  --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
+  --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
+  --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
+  --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
+  --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
+  --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
+  
+  /* Semantic Color Tokens (Dark Mode) */
+  --color-background: var(--color-charcoal-700);
+  --color-surface: var(--color-charcoal-800);
+  --color-text: var(--color-gray-200);
+  --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+  --color-primary: var(--color-teal-300);
+  --color-primary-hover: var(--color-teal-400);
+  --color-primary-active: var(--color-teal-800);
+  --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+  --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+  --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+  --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+  --color-error: var(--color-red-400);
+  --color-success: var(--color-teal-300);
+  --color-warning: var(--color-orange-400);
+  --color-info: var(--color-gray-300);
+  --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+  --color-btn-primary-text: var(--color-slate-900);
+  --color-card-border: rgba(var(--color-gray-400-rgb), 0.15);
+  --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+  --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+  /* Common style patterns - updated for dark mode */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  /* RGB versions for dark mode */
+  --color-success-rgb: var(--color-teal-300-rgb);
+  --color-error-rgb: var(--color-red-400-rgb);
+  --color-warning-rgb: var(--color-orange-400-rgb);
+  --color-info-rgb: var(--color-gray-300-rgb);
+}
+
+[data-color-scheme="light"] {
+  /* RGB versions for opacity control (light mode) */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+
+  /* RGB versions for light mode */
+  --color-success-rgb: var(--color-teal-500-rgb);
+  --color-error-rgb: var(--color-red-500-rgb);
+  --color-warning-rgb: var(--color-orange-500-rgb);
+  --color-info-rgb: var(--color-slate-500-rgb);
+}
+
+/* Base styles */
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+}
+h2 {
+  font-size: var(--font-size-3xl);
+}
+h3 {
+  font-size: var(--font-size-2xl);
+}
+h4 {
+  font-size: var(--font-size-xl);
+}
+h5 {
+  font-size: var(--font-size-lg);
+}
+h6 {
+  font-size: var(--font-size-md);
+}
+
+p {
+  margin: 0 0 var(--space-16) 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+code,
+pre {
+  font-family: var(--font-family-mono);
+  font-size: calc(var(--font-size-base) * 0.95);
+  background-color: var(--color-secondary);
+  border-radius: var(--radius-sm);
+}
+
+code {
+  padding: var(--space-1) var(--space-4);
+}
+
+pre {
+  padding: var(--space-16);
+  margin: var(--space-16) 0;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: none;
+  text-decoration: none;
+  position: relative;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn--primary:active {
+  background: var(--color-primary-active);
+}
+
+.btn--secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+.btn--secondary:active {
+  background: var(--color-secondary-active);
+}
+
+.btn--outline {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--outline:hover {
+  background: var(--color-secondary);
+}
+
+.btn--sm {
+  padding: var(--space-4) var(--space-12);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+}
+
+.btn--lg {
+  padding: var(--space-10) var(--space-20);
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-md);
+}
+
+.btn--full-width {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Form elements */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: var(--space-8) var(--space-12);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+textarea.form-control {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+}
+
+select.form-control {
+  padding: var(--space-8) var(--space-12);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: var(--select-caret-light);
+  background-repeat: no-repeat;
+  background-position: right var(--space-12) center;
+  background-size: 16px;
+  padding-right: var(--space-32);
+}
+
+/* Add a dark mode specific caret */
+@media (prefers-color-scheme: dark) {
+  select.form-control {
+    background-image: var(--select-caret-dark);
+  }
+}
+
+/* Also handle data-color-scheme */
+[data-color-scheme="dark"] select.form-control {
+  background-image: var(--select-caret-dark);
+}
+
+[data-color-scheme="light"] select.form-control {
+  background-image: var(--select-caret-light);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  outline: var(--focus-outline);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-8);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.form-group {
+  margin-bottom: var(--space-16);
+}
+
+/* Card component */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card__body {
+  padding: var(--space-16);
+}
+
+.card__header,
+.card__footer {
+  padding: var(--space-16);
+  border-bottom: 1px solid var(--color-card-border-inner);
+}
+
+/* Status indicators - simplified with CSS variables */
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.status--success {
+  background-color: rgba(
+    var(--color-success-rgb, 33, 128, 141),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-success);
+  border: 1px solid
+    rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));
+}
+
+.status--error {
+  background-color: rgba(
+    var(--color-error-rgb, 192, 21, 47),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-error);
+  border: 1px solid
+    rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));
+}
+
+.status--warning {
+  background-color: rgba(
+    var(--color-warning-rgb, 168, 75, 47),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-warning);
+  border: 1px solid
+    rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));
+}
+
+.status--info {
+  background-color: rgba(
+    var(--color-info-rgb, 98, 108, 113),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-info);
+  border: 1px solid
+    rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
+}
+
+/* Container layout */
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--space-16);
+  padding-left: var(--space-16);
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: var(--container-sm);
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: var(--container-md);
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: var(--container-lg);
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: var(--container-xl);
+  }
+}
+
+/* Utility classes */
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-4 {
+  gap: var(--space-4);
+}
+.gap-8 {
+  gap: var(--space-8);
+}
+.gap-16 {
+  gap: var(--space-16);
+}
+
+.m-0 {
+  margin: 0;
+}
+.mt-8 {
+  margin-top: var(--space-8);
+}
+.mb-8 {
+  margin-bottom: var(--space-8);
+}
+.mx-8 {
+  margin-left: var(--space-8);
+  margin-right: var(--space-8);
+}
+.my-8 {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.p-0 {
+  padding: 0;
+}
+.py-8 {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+.px-8 {
+  padding-left: var(--space-8);
+  padding-right: var(--space-8);
+}
+.py-16 {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+.px-16 {
+  padding-left: var(--space-16);
+  padding-right: var(--space-16);
+}
+
+.block {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
+
+/* Dark mode specifics */
+[data-color-scheme="dark"] .btn--outline {
+  border: 1px solid var(--color-border-secondary);
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+
+/* END PERPLEXITY DESIGN SYSTEM */
+/* Additional styles specific to the NIFTY500 platform */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  padding: var(--space-20) 0;
+  box-shadow: var(--shadow-md);
+}
+
+.header h1 {
+  color: var(--color-btn-primary-text);
+  margin: 0;
+  font-size: var(--font-size-3xl);
+}
+
+.subtitle {
+  margin: var(--space-8) 0 0 0;
+  font-size: var(--font-size-lg);
+  opacity: 0.9;
+}
+
+.nav-tabs {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding: 0;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: var(--space-16) var(--space-20);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--color-text);
+  background: var(--color-secondary);
+}
+
+.tab-btn.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  background: var(--color-secondary);
+}
+
+.main-content {
+  flex: 1;
+  padding: var(--space-32) 0;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Selection Panel */
+.selection-panel {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  margin-bottom: var(--space-32);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.selection-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-24);
+}
+
+@media (max-width: 768px) {
+  .selection-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dashboard Styles */
+.dashboard-grid {
+  display: grid;
+  gap: var(--space-32);
+}
+
+.metric-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-16);
+}
+
+.metric-card {
+  background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-2));
+  border: 1px solid var(--color-card-border);
+}
+
+.metric-card h3 {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+  font-weight: var(--font-weight-medium);
+}
+
+.metric-value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.chart-section {
+  width: 100%;
+}
+
+.chart-container {
+  margin: var(--space-16) 0;
+}
+
+.portfolio-section h3 {
+  margin-bottom: var(--space-24);
+  color: var(--color-text);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+}
+
+.allocation-details {
+  margin-top: var(--space-16);
+  text-align: center;
+}
+
+/* Sector Analysis Styles */
+.sector-analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-32);
+}
+
+@media (max-width: 1024px) {
+  .sector-analysis-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stock Selection Styles */
+.stock-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+}
+
+.stock-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  position: relative;
+  overflow: hidden;
+}
+
+.stock-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.stock-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.stock-card:hover::before {
+  transform: scaleX(1);
+}
+
+.stock-card.selected {
+  border-color: var(--color-primary);
+  box-shadow: var(--focus-ring);
+}
+
+.stock-card.selected::before {
+  transform: scaleX(1);
+}
+
+.stock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-16);
+}
+
+.stock-symbol {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.stock-price {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.stock-name {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-12);
+}
+
+.stock-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+}
+
+.metric-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-sm);
+}
+
+.metric-label {
+  color: var(--color-text-secondary);
+}
+
+.metric-val {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+/* DCF Valuation Styles */
+.dcf-container {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.dcf-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: var(--space-16);
+  align-items: end;
+  margin-bottom: var(--space-24);
+}
+
+@media (max-width: 768px) {
+  .dcf-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dcf-results {
+  background: var(--color-bg-3);
+  padding: var(--space-20);
+  border-radius: var(--radius-base);
+  text-align: center;
+}
+
+.dcf-results h4 {
+  font-size: var(--font-size-xl);
+  margin: 0;
+}
+
+#intrinsic-value {
+  color: var(--color-success);
+  font-weight: var(--font-weight-bold);
+}
+
+.ratios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-16);
+}
+
+.ratio-item {
+  background: var(--color-bg-4);
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  text-align: center;
+}
+
+.ratio-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+.ratio-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.qvm-section {
+  text-align: center;
+  padding: var(--space-24);
+}
+
+.qvm-value {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-16);
+}
+
+.qvm-value.good {
+  color: var(--color-success);
+}
+
+.qvm-value.bad {
+  color: var(--color-error);
+}
+
+.qvm-interpretation {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  padding: var(--space-16);
+  background: var(--color-bg-5);
+  border-radius: var(--radius-base);
+}
+
+/* Risk Analysis Styles */
+.risk-analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-32);
+}
+
+@media (max-width: 1024px) {
+  .risk-analysis-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.risk-metrics {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.risk-metric-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-12);
+  background: var(--color-bg-6);
+  border-radius: var(--radius-base);
+}
+
+/* Peer Comparison Styles */
+.peer-table-container {
+  overflow-x: auto;
+}
+
+.peer-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-16);
+}
+
+.peer-table th,
+.peer-table td {
+  padding: var(--space-12);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.peer-table th {
+  background: var(--color-bg-7);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+}
+
+.peer-table td {
+  font-size: var(--font-size-sm);
+}
+
+.peer-table tr:hover {
+  background: var(--color-bg-8);
+}
+
+.peer-table .current-stock {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.peer-table .current-stock:hover {
+  background: var(--color-primary-hover);
+}
+
+/* Forecasts Styles */
+.forecasts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-32);
+}
+
+@media (max-width: 1024px) {
+  .forecasts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scenario-analysis {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.scenario-item {
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  border-left: 4px solid;
+}
+
+.scenario-item.bull {
+  background: var(--color-bg-3);
+  border-left-color: var(--color-success);
+}
+
+.scenario-item.base {
+  background: var(--color-bg-2);
+  border-left-color: var(--color-warning);
+}
+
+.scenario-item.bear {
+  background: var(--color-bg-4);
+  border-left-color: var(--color-error);
+}
+
+.scenario-title {
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-8);
+}
+
+.scenario-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Methodology & Disclaimer Styles */
+.methodology-content,
+.disclaimer-content {
+  line-height: var(--line-height-normal);
+}
+
+.methodology-content h4,
+.disclaimer-content h4 {
+  margin: var(--space-24) 0 var(--space-12) 0;
+  color: var(--color-text);
+}
+
+.methodology-content ul,
+.disclaimer-content ul {
+  margin: var(--space-12) 0;
+  padding-left: var(--space-20);
+}
+
+.methodology-content li,
+.disclaimer-content li {
+  margin-bottom: var(--space-8);
+  color: var(--color-text-secondary);
+}
+
+/* Loading States */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-32);
+  color: var(--color-text-secondary);
+}
+
+.loading::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: var(--space-12);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Empty States */
+.empty-state {
+  text-align: center;
+  padding: var(--space-32);
+  color: var(--color-text-secondary);
+}
+
+.empty-state h3 {
+  margin-bottom: var(--space-16);
+  color: var(--color-text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tab-buttons {
+    padding: 0 var(--space-16);
+  }
+  
+  .tab-btn {
+    padding: var(--space-12) var(--space-16);
+    font-size: var(--font-size-sm);
+  }
+  
+  .metric-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stock-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Custom scrollbar */
+.tab-buttons::-webkit-scrollbar {
+  height: 3px;
+}
+
+.tab-buttons::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+.tab-buttons::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+/* Animation for tab switching */
+.tab-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1>NIFTY500 Multi-Sector Equity Research Platform</h1>
+                <p class="subtitle">Research Scientist Survesh Bajpai</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <div class="container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+                    <button class="tab-btn" data-tab="sector-analysis">Sector Analysis</button>
+                    <button class="tab-btn" data-tab="stock-selection">Stock Selection</button>
+                    <button class="tab-btn" data-tab="dcf-valuation">DCF Valuation</button>
+                    <button class="tab-btn" data-tab="risk-analysis">Risk Analysis</button>
+                    <button class="tab-btn" data-tab="peer-comparison">Peer Comparison</button>
+                    <button class="tab-btn" data-tab="forecasts">Forecasts</button>
+                    <button class="tab-btn" data-tab="methodology">Methodology</button>
+                    <button class="tab-btn" data-tab="disclaimer">Disclaimer</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="tab-content active">
+                    <div class="selection-panel">
+                        <div class="selection-row">
+                            <div class="selection-group">
+                                <label for="sector-select">Select Sector:</label>
+                                <select id="sector-select">
+                                    <option value="">All Sectors</option>
+                                    <option value="Banks">Banks</option>
+                                    <option value="IT Software">IT Software</option>
+                                    <option value="Petroleum Products">Petroleum Products</option>
+                                    <option value="FMCG">FMCG</option>
+                                    <option value="Financial Services">Financial Services</option>
+                                    <option value="Telecom">Telecom</option>
+                                </select>
+                            </div>
+                            <div class="selection-group">
+                                <label for="stock-select">Select Stock:</label>
+                                <select id="stock-select">
+                                    <option value="">Select a Stock</option>
+                                    <option value="RELIANCE">Reliance Industries Ltd</option>
+                                    <option value="HDFCBANK">HDFC Bank Ltd</option>
+                                    <option value="TCS">Tata Consultancy Services</option>
+                                    <option value="ICICIBANK">ICICI Bank Ltd</option>
+                                    <option value="BHARTIARTL">Bharti Airtel Ltd</option>
+                                    <option value="INFY">Infosys Ltd</option>
+                                    <option value="SBIN">State Bank of India</option>
+                                    <option value="HINDUNILVR">Hindustan Unilever Ltd</option>
+                                    <option value="WIPRO">Wipro Ltd</option>
+                                    <option value="BAJFINANCE">Bajaj Finance Ltd</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <!-- Key Metrics Cards -->
+                        <div class="metrics-row">
+                            <div class="metric-card">
+                                <h3>Market Cap</h3>
+                                <p id="market-cap-value">₹0 Cr</p>
+                                <span class="change positive" id="market-cap-change">+0%</span>
+                            </div>
+                            <div class="metric-card">
+                                <h3>Current Price</h3>
+                                <p id="price-value">₹0</p>
+                                <span class="change positive" id="price-change">+0%</span>
+                            </div>
+                            <div class="metric-card">
+                                <h3>P/E Ratio</h3>
+                                <p id="pe-value">0</p>
+                                <span class="change" id="pe-change">Industry Avg</span>
+                            </div>
+                            <div class="metric-card">
+                                <h3>ROE</h3>
+                                <p id="roe-value">0%</p>
+                                <span class="change" id="roe-change">Industry Avg</span>
+                            </div>
+                        </div>
+
+                        <!-- Revenue Growth Chart -->
+                        <div class="chart-container">
+                            <h3>Revenue Growth Trajectory</h3>
+                            <canvas id="revenue-growth-chart"></canvas>
+                        </div>
+
+                        <!-- Portfolio Allocation -->
+                        <div class="portfolio-section">
+                            <h3>Recommended Portfolio Allocation</h3>
+                            <div class="portfolio-grid">
+                                <div class="portfolio-card">
+                                    <h4>Conservative</h4>
+                                    <canvas id="conservative-chart"></canvas>
+                                    <p>Expected Return: 8.5%</p>
+                                    <p>Risk: Low</p>
+                                </div>
+                                <div class="portfolio-card">
+                                    <h4>Balanced</h4>
+                                    <canvas id="balanced-chart"></canvas>
+                                    <p>Expected Return: 11.2%</p>
+                                    <p>Risk: Medium</p>
+                                </div>
+                                <div class="portfolio-card">
+                                    <h4>Aggressive</h4>
+                                    <canvas id="aggressive-chart"></canvas>
+                                    <p>Expected Return: 14.8%</p>
+                                    <p>Risk: High</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sector Weightage -->
+                        <div class="chart-container">
+                            <h3>NIFTY500 Sector Weightage</h3>
+                            <canvas id="sector-weightage-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sector Analysis Tab -->
+                <div id="sector-analysis" class="tab-content">
+                    <h2>Sector Analysis</h2>
+                    <div class="analysis-grid">
+                        <div class="chart-container">
+                            <h3>Sector Valuation Analysis</h3>
+                            <canvas id="sector-valuation-chart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Growth vs Risk Matrix</h3>
+                            <canvas id="growth-risk-chart"></canvas>
+                        </div>
+                        <div class="sector-performance">
+                            <h3>Sector Performance Comparison</h3>
+                            <table class="performance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sector</th>
+                                        <th>Weightage</th>
+                                        <th>P/E Ratio</th>
+                                        <th>Growth Rate</th>
+                                        <th>Volatility</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sector-performance-tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Selection Tab -->
+                <div id="stock-selection" class="tab-content">
+                    <h2>Stock Selection</h2>
+                    <div class="search-filters">
+                        <input type="text" id="stock-search" placeholder="Search stocks...">
+                        <select id="sector-filter">
+                            <option value="">All Sectors</option>
+                            <option value="Banks">Banks</option>
+                            <option value="IT Software">IT Software</option>
+                            <option value="Petroleum Products">Petroleum Products</option>
+                            <option value="FMCG">FMCG</option>
+                            <option value="Financial Services">Financial Services</option>
+                            <option value="Telecom">Telecom</option>
+                        </select>
+                    </div>
+                    <div class="stocks-grid" id="stocks-grid">
+                        <!-- Stock cards will be populated here -->
+                    </div>
+                </div>
+
+                <!-- DCF Valuation Tab -->
+                <div id="dcf-valuation" class="tab-content">
+                    <h2>DCF Valuation Analysis</h2>
+                    <div id="dcf-content">
+                        <p class="placeholder-text">Please select a stock to perform DCF valuation</p>
+                    </div>
+                </div>
+
+                <!-- Risk Analysis Tab -->
+                <div id="risk-analysis" class="tab-content">
+                    <h2>Risk Analysis</h2>
+                    <div id="risk-content">
+                        <p class="placeholder-text">Please select a stock to perform risk analysis</p>
+                    </div>
+                </div>
+
+                <!-- Peer Comparison Tab -->
+                <div id="peer-comparison" class="tab-content">
+                    <h2>Peer Comparison</h2>
+                    <div id="peer-content">
+                        <p class="placeholder-text">Please select a stock to compare with peers</p>
+                    </div>
+                </div>
+
+                <!-- Forecasts Tab -->
+                <div id="forecasts" class="tab-content">
+                    <h2>Financial Forecasts</h2>
+                    <div id="forecast-content">
+                        <p class="placeholder-text">Please select a stock to view forecasts</p>
+                    </div>
+                </div>
+
+                <!-- Methodology Tab -->
+                <div id="methodology" class="tab-content">
+                    <h2>Methodology</h2>
+                    <div class="methodology-content">
+                        <h3>Key Drivers</h3>
+                        <ul>
+                            <li><strong>Economic Factors:</strong> GDP growth, inflation, interest rates, and monetary policy</li>
+                            <li><strong>Industry Dynamics:</strong> Sector growth trends, regulatory changes, and competitive landscape</li>
+                            <li><strong>Company Fundamentals:</strong> Revenue growth, profitability, debt levels, and management quality</li>
+                            <li><strong>Market Sentiment:</strong> Investor behavior, risk appetite, and market valuations</li>
+                        </ul>
+
+                        <h3>Models Used</h3>
+                        <ul>
+                            <li><strong>DCF (Discounted Cash Flow) Model:</strong> For intrinsic value calculation based on future cash flows</li>
+                            <li><strong>EIC Framework:</strong> Economic, Industry, and Company analysis for comprehensive evaluation</li>
+                            <li><strong>Relative Valuation:</strong> P/E, PEG, P/B, and custom QVM metrics for peer comparison</li>
+                            <li><strong>Porter's 5 Forces:</strong> For industry attractiveness and competitive positioning analysis</li>
+                            <li><strong>Risk Assessment Models:</strong> Beta calculation, VaR analysis, and scenario planning</li>
+                        </ul>
+
+                        <h3>Key Assumptions</h3>
+                        <ul>
+                            <li><strong>Risk-Free Rate:</strong> 7.2% (10-year Government Bond yield)</li>
+                            <li><strong>Market Risk Premium:</strong> 6.8% (Historical market excess return)</li>
+                            <li><strong>Terminal Growth Rate:</strong> 3-4% (Long-term GDP growth assumption)</li>
+                            <li><strong>Tax Rate:</strong> 25% (Corporate tax rate in India)</li>
+                            <li><strong>Beta Calculation:</strong> 5-year rolling correlation with NIFTY500 index</li>
+                        </ul>
+
+                        <h3>QVM (Quantitative Valuation Metric)</h3>
+                        <p>Our proprietary metric calculated as the geometric mean of:</p>
+                        <ul>
+                            <li>ROE / Cost of Equity</li>
+                            <li>ROCE / WACC</li>
+                            <li>Intrinsic Value / Book Value</li>
+                            <li>1 / PEG Ratio</li>
+                        </ul>
+                        <p><strong>Interpretation:</strong> QVM > 1 indicates attractive investment opportunity; QVM < 1 suggests overvaluation</p>
+                    </div>
+                </div>
+
+                <!-- Disclaimer Tab -->
+                <div id="disclaimer" class="tab-content">
+                    <h2>Most Important Terms and Conditions (MITC)</h2>
+                    <div class="disclaimer-content">
+                        <h3>Author Credentials</h3>
+                        <ul>
+                            <li>NISM PGP RA/IA/PM (Research Analyst/Investment Advisor/Portfolio Manager)</li>
+                            <li>IIMBx Finance Certification</li>
+                            <li>World Quant University US - MSc in Financial Engineering</li>
+                        </ul>
+
+                        <h3>Important Disclaimers</h3>
+                        <ul>
+                            <li><strong>Investment Risk:</strong> All investments are subject to market risk. Past performance does not guarantee future results.</li>
+                            <li><strong>Research Purpose:</strong> This analysis is for educational and research purposes only, not investment advice.</li>
+                            <li><strong>Data Accuracy:</strong> While efforts are made to ensure data accuracy, errors may occur. Users should verify information independently.</li>
+                            <li><strong>Model Limitations:</strong> Financial models are based on assumptions that may not hold in all market conditions.</li>
+                            <li><strong>Regulatory Compliance:</strong> Users must comply with applicable securities laws and regulations in their jurisdiction.</li>
+                        </ul>
+
+                        <h3>Risk Warnings</h3>
+                        <ul>
+                            <li>Equity investments can result in significant losses, including loss of principal</li>
+                            <li>Market volatility can impact investment returns substantially</li>
+                            <li>Sector-specific risks may affect individual stock performance</li>
+                            <li>Currency and political risks may impact foreign investments</li>
+                            <li>Liquidity risks may affect ability to exit positions</li>
+                        </ul>
+
+                        <h3>Data Sources</h3>
+                        <p>Data is sourced from NSE, BSE, company annual reports, and reputable financial data providers. 
+                        Real-time data may be delayed by 15-20 minutes as per exchange regulations.</p>
+
+                        <h3>Contact Information</h3>
+                        <p>For questions regarding this research platform, please contact through official channels as per regulatory guidelines.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+// NIFTY500 Multi-Sector Equity Research Platform
+// Data from the provided JSON
+const stocksData = [
+    {
+        "symbol": "RELIANCE",
+        "name": "Reliance Industries Ltd",
+        "sector": "Petroleum Products",
+        "market_cap": 1859023,
+        "price": 2756.25,
+        "pe_ratio": 28.5,
+        "peg_ratio": 1.2,
+        "roe": 12.8,
+        "roce": 11.5,
+        "revenue_growth": 8.5,
+        "beta": 1.15,
+        "dividend_yield": 0.4
+    },
+    {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank Ltd",
+        "sector": "Banks",
+        "market_cap": 1528387,
+        "price": 1995.75,
+        "pe_ratio": 21.2,
+        "peg_ratio": 1.8,
+        "roe": 16.5,
+        "roce": 18.2,
+        "revenue_growth": 12.3,
+        "beta": 0.95,
+        "dividend_yield": 1.2
+    },
+    {
+        "symbol": "TCS",
+        "name": "Tata Consultancy Services",
+        "sector": "IT Software",
+        "market_cap": 1093350,
+        "price": 3045.60,
+        "pe_ratio": 25.8,
+        "peg_ratio": 1.5,
+        "roe": 42.5,
+        "roce": 45.8,
+        "revenue_growth": 9.2,
+        "beta": 0.85,
+        "dividend_yield": 2.8
+    },
+    {
+        "symbol": "ICICIBANK",
+        "name": "ICICI Bank Ltd",
+        "sector": "Banks",
+        "market_cap": 1018982,
+        "price": 1456.30,
+        "pe_ratio": 19.5,
+        "peg_ratio": 1.6,
+        "roe": 15.8,
+        "roce": 17.1,
+        "revenue_growth": 14.2,
+        "beta": 1.05,
+        "dividend_yield": 0.8
+    },
+    {
+        "symbol": "BHARTIARTL",
+        "name": "Bharti Airtel Ltd",
+        "sector": "Telecom",
+        "market_cap": 1123942,
+        "price": 1895.45,
+        "pe_ratio": 35.2,
+        "peg_ratio": 2.1,
+        "roe": 14.2,
+        "roce": 12.8,
+        "revenue_growth": 6.8,
+        "beta": 0.78,
+        "dividend_yield": 0.6
+    },
+    {
+        "symbol": "INFY",
+        "name": "Infosys Ltd",
+        "sector": "IT Software",
+        "market_cap": 601310,
+        "price": 1425.80,
+        "pe_ratio": 23.4,
+        "peg_ratio": 1.7,
+        "roe": 28.5,
+        "roce": 32.1,
+        "revenue_growth": 7.8,
+        "beta": 0.92,
+        "dividend_yield": 3.2
+    },
+    {
+        "symbol": "SBIN",
+        "name": "State Bank of India",
+        "sector": "Banks",
+        "market_cap": 763095,
+        "price": 855.25,
+        "pe_ratio": 15.2,
+        "peg_ratio": 1.3,
+        "roe": 13.8,
+        "roce": 14.2,
+        "revenue_growth": 11.5,
+        "beta": 1.25,
+        "dividend_yield": 1.5
+    },
+    {
+        "symbol": "HINDUNILVR",
+        "name": "Hindustan Unilever Ltd",
+        "sector": "FMCG",
+        "market_cap": 583392,
+        "price": 2485.60,
+        "pe_ratio": 58.2,
+        "peg_ratio": 3.2,
+        "roe": 85.2,
+        "roce": 92.5,
+        "revenue_growth": 5.2,
+        "beta": 0.65,
+        "dividend_yield": 1.8
+    },
+    {
+        "symbol": "WIPRO",
+        "name": "Wipro Ltd",
+        "sector": "IT Software",
+        "market_cap": 285450,
+        "price": 515.75,
+        "pe_ratio": 18.5,
+        "peg_ratio": 2.8,
+        "roe": 14.2,
+        "roce": 16.8,
+        "revenue_growth": 3.2,
+        "beta": 0.88,
+        "dividend_yield": 2.5
+    },
+    {
+        "symbol": "BAJFINANCE",
+        "name": "Bajaj Finance Ltd",
+        "sector": "Financial Services",
+        "market_cap": 485620,
+        "price": 7985.30,
+        "pe_ratio": 28.5,
+        "peg_ratio": 1.4,
+        "roe": 22.8,
+        "roce": 24.5,
+        "revenue_growth": 18.5,
+        "beta": 1.32,
+        "dividend_yield": 0.4
+    }
+];
+
+const sectorsData = [
+    {
+        "name": "Banks",
+        "weightage": 13.24,
+        "pe_ratio": 18.5,
+        "growth_rate": 12.5,
+        "volatility": 22.8,
+        "companies": 26
+    },
+    {
+        "name": "IT Software",
+        "weightage": 8.26,
+        "pe_ratio": 22.5,
+        "growth_rate": 8.2,
+        "volatility": 18.5,
+        "companies": 29
+    },
+    {
+        "name": "Petroleum Products",
+        "weightage": 5.89,
+        "pe_ratio": 25.8,
+        "growth_rate": 6.8,
+        "volatility": 28.5,
+        "companies": 7
+    },
+    {
+        "name": "FMCG",
+        "weightage": 3.29,
+        "pe_ratio": 45.2,
+        "growth_rate": 5.8,
+        "volatility": 15.2,
+        "companies": 6
+    },
+    {
+        "name": "Financial Services",
+        "weightage": 7.82,
+        "pe_ratio": 24.5,
+        "growth_rate": 15.8,
+        "volatility": 25.8,
+        "companies": 43
+    },
+    {
+        "name": "Telecom",
+        "weightage": 3.62,
+        "pe_ratio": 32.5,
+        "growth_rate": 8.5,
+        "volatility": 32.8,
+        "companies": 11
+    }
+];
+
+const portfolioAllocations = {
+    "conservative": {
+        "equity": 20,
+        "debt": 70,
+        "alternatives": 10,
+        "expected_return": 8.5,
+        "risk": "Low"
+    },
+    "balanced": {
+        "equity": 50,
+        "debt": 40,
+        "alternatives": 10,
+        "expected_return": 11.2,
+        "risk": "Medium"
+    },
+    "aggressive": {
+        "equity": 80,
+        "debt": 15,
+        "alternatives": 5,
+        "expected_return": 14.8,
+        "risk": "High"
+    }
+};
+
+// Global variables
+let selectedStock = null;
+let selectedSector = null;
+let charts = {};
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing application...');
+    initializeTabs();
+    populateSelectors();
+    setTimeout(() => {
+        createPortfolioCharts();
+        createSectorAnalysisCharts();
+        populateStockGrid();
+        updateDashboard();
+    }, 100);
+});
+
+// Tab Management - Fixed implementation
+function initializeTabs() {
+    console.log('Setting up tabs...');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tabName = button.getAttribute('data-tab');
+            console.log('Tab clicked:', tabName);
+            
+            // Remove active class from all tabs and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            button.classList.add('active');
+            const targetTab = document.getElementById(tabName);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                console.log('Tab switched to:', tabName);
+            }
+        });
+    });
+}
+
+// Populate sector and stock selectors
+function populateSelectors() {
+    console.log('Populating selectors...');
+    const sectorSelect = document.getElementById('sector-select');
+    const stockSelect = document.getElementById('stock-select');
+    
+    // Populate sectors
+    const uniqueSectors = [...new Set(stocksData.map(stock => stock.sector))];
+    uniqueSectors.forEach(sector => {
+        const option = document.createElement('option');
+        option.value = sector;
+        option.textContent = sector;
+        sectorSelect.appendChild(option);
+    });
+    
+    // Populate stocks
+    stocksData.forEach(stock => {
+        const option = document.createElement('option');
+        option.value = stock.symbol;
+        option.textContent = `${stock.symbol} - ${stock.name}`;
+        stockSelect.appendChild(option);
+    });
+    
+    // Add event listeners
+    sectorSelect.addEventListener('change', handleSectorChange);
+    stockSelect.addEventListener('change', handleStockChange);
+}
+
+function handleSectorChange(event) {
+    selectedSector = event.target.value;
+    console.log('Sector changed to:', selectedSector);
+    updateStockSelector();
+    updateSectorAnalysis();
+}
+
+function handleStockChange(event) {
+    const symbol = event.target.value;
+    console.log('Stock changed to:', symbol);
+    selectedStock = symbol ? stocksData.find(stock => stock.symbol === symbol) : null;
+    if (selectedStock) {
+        console.log('Selected stock data:', selectedStock);
+        updateAllSections();
+    }
+}
+
+function updateStockSelector() {
+    const stockSelect = document.getElementById('stock-select');
+    const filteredStocks = selectedSector ? 
+        stocksData.filter(stock => stock.sector === selectedSector) : 
+        stocksData;
+    
+    // Clear existing options except first one
+    stockSelect.innerHTML = '<option value="">Select a stock</option>';
+    
+    filteredStocks.forEach(stock => {
+        const option = document.createElement('option');
+        option.value = stock.symbol;
+        option.textContent = `${stock.symbol} - ${stock.name}`;
+        stockSelect.appendChild(option);
+    });
+}
+
+// Update all sections when stock is selected - Fixed implementation
+function updateAllSections() {
+    console.log('Updating all sections for:', selectedStock?.name);
+    updateDashboard();
+    updateDCFValuation();
+    updateRiskAnalysis();
+    updatePeerComparison();
+    updateForecasts();
+    highlightSelectedStock();
+}
+
+// Dashboard Updates - Fixed implementation
+function updateDashboard() {
+    console.log('Updating dashboard...');
+    const marketCapEl = document.getElementById('market-cap');
+    const peRatioEl = document.getElementById('pe-ratio');
+    const roeEl = document.getElementById('roe');
+    const revenueGrowthEl = document.getElementById('revenue-growth');
+    
+    if (selectedStock) {
+        console.log('Populating dashboard with stock data:', selectedStock.symbol);
+        if (marketCapEl) marketCapEl.textContent = `â¹ ${(selectedStock.market_cap / 100).toFixed(0)} Cr`;
+        if (peRatioEl) peRatioEl.textContent = selectedStock.pe_ratio.toFixed(1);
+        if (roeEl) roeEl.textContent = `${selectedStock.roe.toFixed(1)}%`;
+        if (revenueGrowthEl) revenueGrowthEl.textContent = `${selectedStock.revenue_growth.toFixed(1)}%`;
+        
+        createRevenueChart();
+    } else {
+        console.log('No stock selected, showing default values');
+        if (marketCapEl) marketCapEl.textContent = 'â¹ --';
+        if (peRatioEl) peRatioEl.textContent = '--';
+        if (roeEl) roeEl.textContent = '--%';
+        if (revenueGrowthEl) revenueGrowthEl.textContent = '--%';
+        
+        createRevenueChart(); // Show overall market data
+    }
+}
+
+// Chart Creation Functions - Fixed implementation
+function createRevenueChart() {
+    const ctx = document.getElementById('revenue-chart');
+    if (!ctx) {
+        console.log('Revenue chart canvas not found');
+        return;
+    }
+    
+    if (charts.revenueChart) {
+        charts.revenueChart.destroy();
+    }
+    
+    const years = ['2020', '2021', '2022', '2023', '2024', '2025E', '2026E'];
+    let revenueData;
+    
+    if (selectedStock) {
+        const baseRevenue = 100;
+        const growthRate = selectedStock.revenue_growth / 100;
+        revenueData = years.map((year, index) => {
+            if (index < 4) {
+                return baseRevenue * Math.pow(1 + growthRate + (Math.random() - 0.5) * 0.1, index);
+            } else {
+                return baseRevenue * Math.pow(1 + growthRate, index);
+            }
+        });
+    } else {
+        // Market average
+        revenueData = [100, 105, 112, 120, 128, 138, 148];
+    }
+    
+    charts.revenueChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: [{
+                label: selectedStock ? `${selectedStock.name} Revenue` : 'Market Average Revenue',
+                data: revenueData,
+                borderColor: '#1FB8CD',
+                backgroundColor: 'rgba(31, 184, 205, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    title: {
+                        display: true,
+                        text: 'Revenue (Index: 2020 = 100)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+    console.log('Revenue chart created');
+}
+
+function createPortfolioCharts() {
+    console.log('Creating portfolio charts...');
+    const allocations = ['conservative', 'balanced', 'aggressive'];
+    const colors = ['#1FB8CD', '#FFC185', '#B4413C'];
+    
+    allocations.forEach(allocation => {
+        const ctx = document.getElementById(`${allocation}-chart`);
+        if (!ctx) {
+            console.log(`${allocation} chart canvas not found`);
+            return;
+        }
+        
+        const data = portfolioAllocations[allocation];
+        
+        charts[`${allocation}Chart`] = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Equity', 'Debt', 'Alternatives'],
+                datasets: [{
+                    data: [data.equity, data.debt, data.alternatives],
+                    backgroundColor: colors,
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    }
+                }
+            }
+        });
+        console.log(`${allocation} portfolio chart created`);
+    });
+}
+
+function createSectorAnalysisCharts() {
+    console.log('Creating sector analysis charts...');
+    
+    // Sector Valuation Chart
+    const sectorValCtx = document.getElementById('sector-valuation-chart');
+    if (sectorValCtx) {
+        charts.sectorValuationChart = new Chart(sectorValCtx, {
+            type: 'bar',
+            data: {
+                labels: sectorsData.map(s => s.name),
+                datasets: [
+                    {
+                        label: 'P/E Ratio',
+                        data: sectorsData.map(s => s.pe_ratio),
+                        backgroundColor: '#1FB8CD',
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'PEG Ratio',
+                        data: sectorsData.map(s => s.pe_ratio / s.growth_rate),
+                        backgroundColor: '#FFC185',
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: { display: true, text: 'P/E Ratio' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: { display: true, text: 'PEG Ratio' },
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+        console.log('Sector valuation chart created');
+    }
+    
+    // Growth vs Risk Matrix
+    const growthRiskCtx = document.getElementById('growth-risk-chart');
+    if (growthRiskCtx) {
+        charts.growthRiskChart = new Chart(growthRiskCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Sectors',
+                    data: sectorsData.map(s => ({ x: s.growth_rate, y: s.volatility, label: s.name })),
+                    backgroundColor: '#B4413C',
+                    borderColor: '#B4413C',
+                    pointRadius: 8,
+                    pointHoverRadius: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Growth Rate (%)' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Volatility (%)' }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const point = context.raw;
+                                return `${sectorsData[context.dataIndex].name}: Growth ${point.x}%, Volatility ${point.y}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        console.log('Growth vs risk chart created');
+    }
+}
+
+// Stock Grid Population
+function populateStockGrid() {
+    console.log('Populating stock grid...');
+    const stockGrid = document.getElementById('stock-grid');
+    if (!stockGrid) return;
+    
+    stockGrid.innerHTML = '';
+    
+    stocksData.forEach(stock => {
+        const stockCard = createStockCard(stock);
+        stockGrid.appendChild(stockCard);
+    });
+    console.log('Stock grid populated with', stocksData.length, 'stocks');
+}
+
+function createStockCard(stock) {
+    const card = document.createElement('div');
+    card.className = 'stock-card';
+    card.setAttribute('data-symbol', stock.symbol);
+    
+    card.innerHTML = `
+        <div class="stock-header">
+            <div>
+                <div class="stock-symbol">${stock.symbol}</div>
+                <div class="stock-name">${stock.name}</div>
+            </div>
+            <div class="stock-price">â¹${stock.price.toFixed(2)}</div>
+        </div>
+        <div class="stock-metrics">
+            <div class="metric-item">
+                <span class="metric-label">P/E:</span>
+                <span class="metric-val">${stock.pe_ratio}</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">ROE:</span>
+                <span class="metric-val">${stock.roe}%</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Growth:</span>
+                <span class="metric-val">${stock.revenue_growth}%</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Sector:</span>
+                <span class="metric-val">${stock.sector}</span>
+            </div>
+        </div>
+    `;
+    
+    card.addEventListener('click', () => selectStock(stock));
+    
+    return card;
+}
+
+function selectStock(stock) {
+    console.log('Stock selected from card:', stock.symbol);
+    selectedStock = stock;
+    
+    // Update stock selector
+    document.getElementById('stock-select').value = stock.symbol;
+    
+    updateAllSections();
+}
+
+function highlightSelectedStock() {
+    document.querySelectorAll('.stock-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    
+    if (selectedStock) {
+        const selectedCard = document.querySelector(`[data-symbol="${selectedStock.symbol}"]`);
+        if (selectedCard) {
+            selectedCard.classList.add('selected');
+        }
+    }
+}
+
+// DCF Valuation
+function updateDCFValuation() {
+    console.log('Updating DCF valuation...');
+    if (!selectedStock) {
+        document.getElementById('intrinsic-value').textContent = '--';
+        document.getElementById('forward-ratios').innerHTML = '<div class="empty-state"><h3>Select a stock to view DCF analysis</h3></div>';
+        updateQVM();
+        return;
+    }
+    
+    calculateDCF();
+    updateForwardRatios();
+    updateQVM();
+}
+
+function calculateDCF() {
+    if (!selectedStock) return;
+    
+    const growthRateEl = document.getElementById('growth-rate');
+    const discountRateEl = document.getElementById('discount-rate');
+    
+    const growthRate = growthRateEl ? parseFloat(growthRateEl.value) / 100 : 0.1;
+    const discountRate = discountRateEl ? parseFloat(discountRateEl.value) / 100 : 0.12;
+    
+    // Simplified DCF calculation
+    const currentEarnings = selectedStock.market_cap / selectedStock.pe_ratio;
+    const terminalValue = currentEarnings * (1 + growthRate) * 5 / (discountRate - 0.03);
+    const dcfValue = terminalValue / Math.pow(1 + discountRate, 5);
+    
+    const intrinsicValueEl = document.getElementById('intrinsic-value');
+    if (intrinsicValueEl) {
+        intrinsicValueEl.textContent = `â¹${(dcfValue / 100).toFixed(0)} Cr`;
+    }
+}
+
+function updateForwardRatios() {
+    if (!selectedStock) return;
+    
+    const costOfEquity = 12.5;
+    const wacc = 9.8;
+    
+    const forwardPE = selectedStock.pe_ratio * 0.9; // Forward P/E typically lower
+    const forwardPEG = selectedStock.peg_ratio * 0.95;
+    const forwardROECOE = (selectedStock.roe * 1.1) / costOfEquity;
+    const forwardROCEWACC = (selectedStock.roce * 1.1) / wacc;
+    const ivBookValue = 1.2; // Assumed intrinsic value to book value ratio
+    
+    const ratiosHtml = `
+        <div class="ratio-item">
+            <div class="ratio-label">Forward P/E</div>
+            <div class="ratio-value">${forwardPE.toFixed(1)}</div>
+        </div>
+        <div class="ratio-item">
+            <div class="ratio-label">Forward PEG</div>
+            <div class="ratio-value">${forwardPEG.toFixed(1)}</div>
+        </div>
+        <div class="ratio-item">
+            <div class="ratio-label">Forward ROE/COE</div>
+            <div class="ratio-value">${forwardROECOE.toFixed(2)}</div>
+        </div>
+        <div class="ratio-item">
+            <div class="ratio-label">Forward ROCE/WACC</div>
+            <div class="ratio-value">${forwardROCEWACC.toFixed(2)}</div>
+        </div>
+        <div class="ratio-item">
+            <div class="ratio-label">IV/Book Value</div>
+            <div class="ratio-value">${ivBookValue.toFixed(2)}</div>
+        </div>
+    `;
+    
+    const forwardRatiosEl = document.getElementById('forward-ratios');
+    if (forwardRatiosEl) {
+        forwardRatiosEl.innerHTML = ratiosHtml;
+    }
+}
+
+function updateQVM() {
+    const qvmValueEl = document.getElementById('qvm-value');
+    const qvmInterpretationEl = document.getElementById('qvm-interpretation');
+    
+    if (!selectedStock) {
+        if (qvmValueEl) qvmValueEl.textContent = '--';
+        if (qvmInterpretationEl) qvmInterpretationEl.textContent = 'Select a stock to calculate QVM';
+        return;
+    }
+    
+    const costOfEquity = 12.5;
+    const wacc = 9.8;
+    
+    const roeCOE = (selectedStock.roe * 1.1) / costOfEquity;
+    const roceWACC = (selectedStock.roce * 1.1) / wacc;
+    const ivBV = 1.2;
+    const invPEG = 1 / (selectedStock.peg_ratio * 0.95);
+    
+    // Geometric mean
+    const qvm = Math.pow(roeCOE * roceWACC * ivBV * invPEG, 1/4);
+    
+    if (qvmValueEl) {
+        qvmValueEl.textContent = qvm.toFixed(3);
+        
+        if (qvm > 1) {
+            qvmValueEl.className = 'qvm-value good';
+            if (qvmInterpretationEl) {
+                qvmInterpretationEl.textContent = 'â Good Investment - QVM > 1 indicates favorable metrics';
+            }
+        } else {
+            qvmValueEl.className = 'qvm-value bad';
+            if (qvmInterpretationEl) {
+                qvmInterpretationEl.textContent = 'â Poor Investment - QVM < 1 indicates unfavorable metrics';
+            }
+        }
+    }
+}
+
+// Risk Analysis
+function updateRiskAnalysis() {
+    if (!selectedStock) {
+        const riskMetricsEl = document.getElementById('risk-metrics');
+        if (riskMetricsEl) {
+            riskMetricsEl.innerHTML = '<div class="empty-state"><h3>Select a stock to view risk analysis</h3></div>';
+        }
+        return;
+    }
+    
+    createPorterChart();
+    updateRiskMetrics();
+}
+
+function createPorterChart() {
+    const ctx = document.getElementById('porter-chart');
+    if (!ctx) return;
+    
+    if (charts.porterChart) {
+        charts.porterChart.destroy();
+    }
+    
+    // Simulated Porter's 5 Forces scores (1-10 scale)
+    const porterScores = {
+        'Threat of New Entrants': Math.random() * 10,
+        'Bargaining Power of Suppliers': Math.random() * 10,
+        'Bargaining Power of Buyers': Math.random() * 10,
+        'Threat of Substitutes': Math.random() * 10,
+        'Competitive Rivalry': Math.random() * 10
+    };
+    
+    charts.porterChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: Object.keys(porterScores),
+            datasets: [{
+                label: selectedStock.name,
+                data: Object.values(porterScores),
+                backgroundColor: 'rgba(31, 184, 205, 0.2)',
+                borderColor: '#1FB8CD',
+                pointBackgroundColor: '#1FB8CD',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#1FB8CD'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 10
+                }
+            }
+        }
+    });
+}
+
+function updateRiskMetrics() {
+    const var95 = selectedStock.price * selectedStock.beta * 0.05; // Simplified VaR calculation
+    const sharpeRatio = (selectedStock.revenue_growth - 7.2) / (selectedStock.beta * 15);
+    
+    const metricsHtml = `
+        <div class="risk-metric-item">
+            <span>Beta</span>
+            <span>${selectedStock.beta}</span>
+        </div>
+        <div class="risk-metric-item">
+            <span>Value at Risk (95%)</span>
+            <span>â¹${var95.toFixed(2)}</span>
+        </div>
+        <div class="risk-metric-item">
+            <span>Sharpe Ratio</span>
+            <span>${sharpeRatio.toFixed(2)}</span>
+        </div>
+        <div class="risk-metric-item">
+            <span>Volatility</span>
+            <span>${(selectedStock.beta * 20).toFixed(1)}%</span>
+        </div>
+    `;
+    
+    const riskMetricsEl = document.getElementById('risk-metrics');
+    if (riskMetricsEl) {
+        riskMetricsEl.innerHTML = metricsHtml;
+    }
+}
+
+// Peer Comparison
+function updatePeerComparison() {
+    const peerTableEl = document.getElementById('peer-table');
+    if (!peerTableEl) return;
+    
+    if (!selectedStock) {
+        peerTableEl.innerHTML = '<tr><td colspan="8" class="empty-state">Select a stock to view peer comparison</td></tr>';
+        return;
+    }
+    
+    const peers = stocksData.filter(stock => 
+        stock.sector === selectedStock.sector && stock.symbol !== selectedStock.symbol
+    );
+    
+    let tableHtml = `
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Price</th>
+                <th>Market Cap</th>
+                <th>P/E</th>
+                <th>PEG</th>
+                <th>ROE</th>
+                <th>ROCE</th>
+                <th>Growth</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="current-stock">
+                <td><strong>${selectedStock.name}</strong></td>
+                <td>â¹${selectedStock.price}</td>
+                <td>â¹${(selectedStock.market_cap/100).toFixed(0)}Cr</td>
+                <td>${selectedStock.pe_ratio}</td>
+                <td>${selectedStock.peg_ratio}</td>
+                <td>${selectedStock.roe}%</td>
+                <td>${selectedStock.roce}%</td>
+                <td>${selectedStock.revenue_growth}%</td>
+            </tr>
+    `;
+    
+    peers.forEach(peer => {
+        tableHtml += `
+            <tr>
+                <td>${peer.name}</td>
+                <td>â¹${peer.price}</td>
+                <td>â¹${(peer.market_cap/100).toFixed(0)}Cr</td>
+                <td>${peer.pe_ratio}</td>
+                <td>${peer.peg_ratio}</td>
+                <td>${peer.roe}%</td>
+                <td>${peer.roce}%</td>
+                <td>${peer.revenue_growth}%</td>
+            </tr>
+        `;
+    });
+    
+    tableHtml += '</tbody>';
+    peerTableEl.innerHTML = tableHtml;
+}
+
+// Forecasts
+function updateForecasts() {
+    if (!selectedStock) {
+        const scenarioAnalysisEl = document.getElementById('scenario-analysis');
+        if (scenarioAnalysisEl) {
+            scenarioAnalysisEl.innerHTML = '<div class="empty-state"><h3>Select a stock to view forecasts</h3></div>';
+        }
+        return;
+    }
+    
+    createForecastChart();
+    updateScenarioAnalysis();
+}
+
+function createForecastChart() {
+    const ctx = document.getElementById('forecasts-chart');
+    if (!ctx) return;
+    
+    if (charts.forecastChart) {
+        charts.forecastChart.destroy();
+    }
+    
+    const years = ['2024', '2025E', '2026E', '2027E', '2028E'];
+    const baseEarnings = selectedStock.market_cap / selectedStock.pe_ratio / 100;
+    
+    const revenueData = years.map((year, index) => 
+        baseEarnings * Math.pow(1 + selectedStock.revenue_growth/100, index)
+    );
+    
+    const earningsData = years.map((year, index) => 
+        baseEarnings * 0.8 * Math.pow(1 + selectedStock.revenue_growth/100 * 1.2, index)
+    );
+    
+    charts.forecastChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: [
+                {
+                    label: 'Revenue Forecast',
+                    data: revenueData,
+                    borderColor: '#1FB8CD',
+                    backgroundColor: 'rgba(31, 184, 205, 0.1)',
+                    tension: 0.4
+                },
+                {
+                    label: 'Earnings Forecast',
+                    data: earningsData,
+                    borderColor: '#FFC185',
+                    backgroundColor: 'rgba(255, 193, 133, 0.1)',
+                    tension: 0.4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    title: { display: true, text: 'Value (â¹ Cr)' }
+                }
+            }
+        }
+    });
+}
+
+function updateScenarioAnalysis() {
+    const basePrice = selectedStock.price;
+    const bullPrice = basePrice * 1.3;
+    const bearPrice = basePrice * 0.7;
+    
+    const scenarioHtml = `
+        <div class="scenario-item bull">
+            <div class="scenario-title">Bull Case</div>
+            <div class="scenario-value">â¹${bullPrice.toFixed(2)}</div>
+            <p>Strong growth, market expansion</p>
+        </div>
+        <div class="scenario-item base">
+            <div class="scenario-title">Base Case</div>
+            <div class="scenario-value">â¹${basePrice.toFixed(2)}</div>
+            <p>Current fundamentals maintained</p>
+        </div>
+        <div class="scenario-item bear">
+            <div class="scenario-title">Bear Case</div>
+            <div class="scenario-value">â¹${bearPrice.toFixed(2)}</div>
+            <p>Economic slowdown, sector headwinds</p>
+        </div>
+    `;
+    
+    const scenarioAnalysisEl = document.getElementById('scenario-analysis');
+    if (scenarioAnalysisEl) {
+        scenarioAnalysisEl.innerHTML = scenarioHtml;
+    }
+}
+
+// Global function for DCF calculation button
+window.calculateDCF = calculateDCF;
+    </script>
+</body>
+</html>
